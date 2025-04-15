@@ -11,8 +11,9 @@ if __name__ == "__main__":
     # 获取所有 ETF 的详细信息
     etf_details_list = []
     for etf in etf_list:
-        etf_code = etf["symbol"]
-        etf_name = etf["name"]
+        etf_code = etf.get("f12")
+        etf_name = etf.get("f14")
+
         print(f"正在获取 ETF {etf_code} ({etf_name}) 的详细信息...")
         details = get_etf_details(etf_code)
 

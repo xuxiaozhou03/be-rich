@@ -44,7 +44,7 @@ def get_etf_list():
         page_data = json_data["data"]["diff"]
         for item in page_data:
             # 获取 ETF 的详细信息
-            all_etfs.append({"symbol": item.get("f12"), "name": item.get("f14")})
+            all_etfs.append(item)
 
         print(f"已获取第 {page} 页，共 {len(page_data)} 条数据")
 
@@ -55,3 +55,8 @@ def get_etf_list():
         page += 1
 
     return all_etfs
+
+
+if __name__ == '__main__':
+    list = get_etf_list()
+    print(list)
