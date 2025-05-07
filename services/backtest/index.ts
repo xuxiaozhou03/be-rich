@@ -63,7 +63,7 @@ class Backtest {
     });
 
     // 计算回测的结果
-    return this.account.calculateResult();
+    return this.account.result;
   }
 }
 

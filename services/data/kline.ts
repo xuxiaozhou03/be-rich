@@ -1,4 +1,4 @@
-import { request } from "@/utils/request";
+import { request } from "@/lib/request";
 
 // k 线图数据
 export interface IKline {
@@ -74,14 +74,18 @@ export const getEtfKline = async ({
   };
 
   try {
-    const response = await request({ url, params, format: "json" });
-    const dataJson = response.data;
+    const response = await request<{
+      data: {
+        klines: string[];
+      };
+    }>({ url, params, format: "json" });
+    console.log("response", response);
 
-    if (!dataJson.data || !dataJson.data.klines) {
+    if (!response.data || !response.data.klines) {
       return [];
     }
 
-    const klines = dataJson.data.klines;
+    const klines = response.data.klines;
     const result: IKline[] = klines.map((item: string) => {
       const [
         date,

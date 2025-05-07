@@ -2,13 +2,13 @@
 
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
-export async function request(
+export async function request<T = any>(
   options: RequestInit & {
     url: string;
     params?: Record<string, string | number>;
     format?: ResponseFormat;
   }
-): Promise<any> {
+): Promise<T> {
   try {
     // 从 options 中提取 url 和 params
     const { url, params, format = "text", ...fetchOptions } = options;
@@ -34,11 +34,11 @@ export async function request(
     // }
     if (format === "text") {
       const text = await response.text();
-      return { data: text };
+      return text as unknown as T;
     }
     if (format === "json") {
       const json = await response.json();
-      return { data: json };
+      return json as unknown as T;
     }
     throw new Error(`Unsupported response format: ${options.format}`);
   } catch (error) {

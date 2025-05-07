@@ -195,7 +195,7 @@ class Account {
   }
 
   // 计算回测结果
-  calculateResult(): BacktestResult {
+  get result(): BacktestResult {
     const log = this.logs[this.logs.length - 1];
     const totalTrades = this.logs.filter((log) => log.signal).length;
 
@@ -242,10 +242,16 @@ class Account {
         }, 0) / this.logs.length
       );
 
+    // 回报率
+    const totalReturn =
+      ((log.totalAsset - this.config.initialCapital) /
+        this.config.initialCapital) *
+      100;
+
     return {
       initialCapital: this.config.initialCapital,
       finalCapital: log.totalAsset,
-      totalReturn: log.totalProfitAmount,
+      totalReturn,
       trades: this.logs,
       totalTrades,
       winningTrades,

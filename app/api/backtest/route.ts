@@ -1,7 +1,7 @@
 import Backtest from "@/services/backtest";
 import { getEtfKline } from "@/services/data/kline";
 import Boll from "@/services/strategy/strategies/boll";
-import { success } from "@/utils";
+import { success } from "@/lib/utils";
 
 export const GET = async () => {
   const klines = await getEtfKline({});
