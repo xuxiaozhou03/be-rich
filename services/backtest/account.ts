@@ -1,3 +1,4 @@
+import { formatNumber } from "@/lib/utils";
 import { IKline } from "../data/kline";
 import { ISignal } from "../strategy/base";
 
@@ -36,6 +37,8 @@ interface ILog {
   stockProfitAmount: number;
   // 当前持股盈亏率： 当前持股盈亏 / 当前持股投入资金
   stockProfitAmountRate: number;
+  // 手续费
+  fee?: number;
 }
 /**
  * 回测结果接口
@@ -85,7 +88,11 @@ class Account {
 
   constructor(config: IBacktestConfig) {
     this.cash = config.initialCapital;
-    this.config = config;
+    this.config = {
+      ...config,
+      calculateFee: (price: number, quantity: number) =>
+        formatNumber(config.calculateFee(price, quantity)),
+    };
   }
 
   canBuy(price: number, quantity: number) {
@@ -112,18 +119,25 @@ class Account {
     // 是否足够现金购买
     const { canBuy, remark } = this.canBuy(price, quantity);
     if (!canBuy) {
-      this.calculateDailyResult(kline, undefined, remark);
+      this.calculateDailyResult({
+        kline,
+        remark,
+      });
       return;
     }
 
     const buyFee = calculateFee(price, quantity);
-    const totalCost = price * quantity + buyFee;
+    const totalCost = formatNumber(price * quantity + buyFee);
 
-    this.cash -= totalCost;
+    this.cash = formatNumber(this.cash - totalCost);
     this.stock += quantity;
-    this.stockInvestment += totalCost;
+    this.stockInvestment = formatNumber(this.stockInvestment + totalCost);
 
-    this.calculateDailyResult(kline, signal);
+    this.calculateDailyResult({
+      kline,
+      signal,
+      fee: buyFee,
+    });
   }
 
   canSell(quantity: number) {
@@ -147,35 +161,55 @@ class Account {
     // 是否足够股票卖出
     const { canSell, remark } = this.canSell(quantity);
     if (!canSell) {
-      this.calculateDailyResult(kline, undefined, remark);
+      this.calculateDailyResult({
+        kline,
+        remark,
+      });
       return;
     }
 
     const sellFee = calculateFee(price, quantity);
-    const totalIncome = price * quantity - sellFee;
-    this.cash += totalIncome;
+    const totalIncome = formatNumber(price * quantity - sellFee);
+    this.cash = formatNumber(this.cash + totalIncome);
     this.stock -= quantity;
-    this.stockInvestment -= totalIncome;
+    this.stockInvestment = formatNumber(this.stockInvestment - totalIncome);
+    this.calculateDailyResult({
+      kline,
+      signal,
+      fee: sellFee,
+    });
   }
 
   // 计算每一天的回测结果
-  calculateDailyResult(kline: IKline, signal?: ISignal, remark?: string) {
+  calculateDailyResult(opts: {
+    kline: IKline;
+    signal?: ISignal;
+    remark?: string;
+    fee?: number;
+  }) {
+    const { kline, signal, remark, fee } = opts;
     // 计算当前持股市值
-    const stockMarketValue = this.stock * kline.close;
+    const stockMarketValue = formatNumber(this.stock * kline.close);
     // 计算当前持股盈亏
-    const stockProfitAmount = stockMarketValue - this.stockInvestment;
+    const stockProfitAmount = formatNumber(
+      stockMarketValue - this.stockInvestment
+    );
     // 计算当前持股盈亏率
-    const stockProfitAmountRate =
-      stockProfitAmount / (this.stockInvestment || 1);
+    const stockProfitAmountRate = formatNumber(
+      stockProfitAmount / (this.stockInvestment || 1)
+    );
     // 计算当前总资产
-    const totalAsset = this.cash + stockMarketValue;
+    const totalAsset = formatNumber(this.cash + stockMarketValue);
     // 计算当前总盈亏
-    const totalProfitAmount = totalAsset - this.config.initialCapital;
+    const totalProfitAmount = formatNumber(
+      totalAsset - this.config.initialCapital
+    );
     // 计算当前总盈亏率
-    const totalProfitAmountRate =
-      (totalProfitAmount / this.config.initialCapital) * 100;
+    const totalProfitAmountRate = formatNumber(
+      (totalProfitAmount / this.config.initialCapital) * 100
+    );
     // 计算当前持股成本价
-    const costPrice = this.stockInvestment / (this.stock || 1);
+    const costPrice = formatNumber(this.stockInvestment / (this.stock || 1));
 
     this.logs.push({
       kline,
@@ -191,6 +225,7 @@ class Account {
       stockMarketValue,
       stockProfitAmount,
       stockProfitAmountRate,
+      fee,
     });
   }
 

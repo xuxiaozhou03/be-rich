@@ -48,7 +48,9 @@ class Backtest {
       });
 
       if (!signal) {
-        this.account.calculateDailyResult(kline);
+        this.account.calculateDailyResult({
+          kline,
+        });
         return;
       }
 
