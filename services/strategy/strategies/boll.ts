@@ -1,4 +1,4 @@
-import { BaseStrategy, IStrategy } from "../base";
+import { BaseStrategy } from "../base";
 import { bollingerBands } from "indicatorts";
 
 class Boll extends BaseStrategy {

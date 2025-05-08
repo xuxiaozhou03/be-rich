@@ -13,7 +13,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatNumber = (num: number, decimalPlaces: number = 2) => {
+export const formatNumber = (num: number, decimalPlaces: number = 3) => {
   if (num === undefined || num === null) {
     return 0;
   }

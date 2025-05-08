@@ -1,9 +1,9 @@
 "use client";
 
-import { BacktestResult } from "@/services/backtest/account";
+import { IResult } from "@/services/backtest/result";
 
 interface BacktestingStatsProps {
-  result: BacktestResult;
+  result: IResult;
 }
 
 export function BacktestingStats({ result }: BacktestingStatsProps) {

@@ -12,12 +12,8 @@ export interface ISignal {
   description?: string;
 }
 
-interface IStrategyCtx {
+interface IStrategyCtx extends Pick<Account, "canBuy" | "canSell"> {
   prevKlines: IKline[];
-  // 是否足够钱买入
-  canBuy: Account["canBuy"];
-  // 是否足够股票卖出
-  canSell: Account["canSell"];
 }
 
 export interface IStrategy {

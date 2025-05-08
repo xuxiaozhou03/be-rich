@@ -11,7 +11,7 @@ const Page = () => {
           <p className="text-muted-foreground">使用历史数据测试您的策略</p>
         </div>
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="space-y-4">
         <BacktestContext>
           <BacktestingForm />
           <BacktestingResults />

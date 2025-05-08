@@ -1,93 +1,150 @@
 "use client";
 
-import { formatNumber } from "@/lib/utils";
-import { BacktestResult } from "@/services/backtest/account";
+import { cn } from "@/lib/utils";
+import { IResult } from "@/services/backtest/result";
+import DataTable, { Column } from "../data-table";
+import { IRecord } from "@/services/backtest/record";
 
 interface BacktestingTradesProps {
-  result: BacktestResult;
+  result: IResult;
 }
 
 export function BacktestingTrades({ result }: BacktestingTradesProps) {
   // 过滤出已关闭的交易
-  const closedTrades = result.trades
+  const closedTrades = result.records
     .filter((trade) => trade.signal)
-    .map((trade) => {
-      return {
-        isBuy: trade.signal?.type === "buy",
-        date: trade.kline.date,
-        price: trade.signal?.price,
-        quantity: trade.signal?.quantity,
-        value: formatNumber(
-          (trade.signal?.price || 0) * (trade.signal?.quantity || 0)
-        ),
-        fee: trade.fee,
-        // 盈亏
-      };
-    });
-
-  return (
-    <div className="space-y-4">
-      <div className="rounded-md border">
-        <div className="grid grid-cols-6 border-b bg-muted/50 p-3">
-          <div className="font-medium">类型</div>
-          <div className="font-medium">日期</div>
-          <div className="font-medium">价格</div>
-          <div className="font-medium">数量</div>
-          <div className="font-medium">价值</div>
-          <div className="font-medium">手续费</div>
-          <div className="font-medium">盈亏</div>
-        </div>
-        <div className="divide-y">
-          {closedTrades.map((trade, index) => (
-            <div key={index} className="grid grid-cols-6 p-3">
-              <div
-                className={`text-sm font-medium ${
-                  trade.isBuy ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {trade.isBuy ? "买入" : "卖出"}
-              </div>
-              <div className="text-sm">{trade.date}</div>
-              <div className="text-sm">{trade.price}</div>
-              <div className="text-sm">{trade.quantity}</div>
-              <div className="text-sm">{trade.value}</div>
-              <div className="text-sm">{trade.fee}</div>
-              <div
-              // className={`text-sm font-medium ${
-              //   // trade.pnl > 0
-              //   //   ? "text-green-600"
-              //   //   : trade.pnl < 0
-              //   //   ? "text-red-600"
-              //   //   : ""
-              // }`}
-              >
-                {/* {trade.pnl > 0 ? "+" : ""}
-                {trade.pnl.toFixed(2)} */}
-              </div>
-            </div>
-          ))}
-          {closedTrades.length === 0 && (
-            <div className="p-4 text-center text-muted-foreground">
-              没有交易记录
-            </div>
+    .map((trade) => ({
+      ...trade,
+      id: trade.kline.date,
+    }));
+  const columns: Column<IRecord & { id: string }>[] = [
+    {
+      key: "date",
+      header: "日期",
+      cell: (row) => (
+        <div className="text-sm font-medium">{row.kline.date}</div>
+      ),
+    },
+    {
+      key: "action",
+      header: "操作",
+      cell: (row) => (
+        <div
+          className={cn(
+            "text-sm font-medium",
+            row.signal?.type === "buy" ? "text-green-600" : "text-red-600"
           )}
+        >
+          以 {row.signal?.price} 元{" "}
+          {row.signal?.type === "buy" ? "买入" : "卖出"}
+          {row.signal?.quantity} 股
         </div>
-      </div>
+      ),
+    },
+    {
+      key: "price",
+      header: "收盘价",
+      cell: (row) => (
+        <div className="text-sm font-medium">{row.kline.close}</div>
+      ),
+    },
+    {
+      key: "stock",
+      header: "持股数",
+      cell: (row) => <div className="text-sm font-medium">{row.stock}</div>,
+    },
+    {
+      key: "costPrice",
+      header: "成本价",
+      cell: (row) => <div className="text-sm font-medium">{row.costPrice}</div>,
+    },
+    {
+      key: "stockMarketValue",
+      header: "股票市值",
+      cell: (row) => (
+        <div className="text-sm font-medium">{row.stockMarketValue}</div>
+      ),
+    },
+    {
+      key: "stockInvestment",
+      header: "持股投入资金",
+      cell: (row) => (
+        <div className="text-sm font-medium">{row.stockInvestment}</div>
+      ),
+    },
+    {
+      key: "profit",
+      header: "股票盈亏",
+      cell: (row) => (
+        <div
+          className={cn(
+            "text-sm font-medium",
+            row.stockProfitAmount < 0 && "text-green-600",
+            row.stockProfitAmount > 0 && "text-red-600"
+          )}
+        >
+          {row.stockProfitAmount}
+        </div>
+      ),
+    },
+    {
+      key: "profitRate",
+      header: "股票盈亏率",
+      cell: (row) => (
+        <div
+          className={cn(
+            "text-sm font-medium",
+            row.stockProfitAmountRate < 0 && "text-green-600",
+            row.stockProfitAmountRate > 0 && "text-red-600"
+          )}
+        >
+          {row.stockProfitAmountRate}
+        </div>
+      ),
+    },
+    {
+      key: "cash",
+      header: "现金",
+      cell: (row) => <div className="text-sm font-medium">{row.cash}</div>,
+    },
+    {
+      key: "totalAsset",
+      header: "总资产",
+      cell: (row) => (
+        <div className="text-sm font-medium">{row.totalAsset}</div>
+      ),
+    },
+    {
+      key: "totalProfit",
+      header: "总盈亏",
+      cell: (row) => (
+        <div
+          className={cn(
+            "text-sm font-medium",
+            row.totalProfitAmount < 0 && "text-green-600",
+            row.totalProfitAmount > 0 && "text-red-600"
+          )}
+        >
+          {row.totalProfitAmount}
+        </div>
+      ),
+    },
+    {
+      key: "totalProfitRate",
+      header: "总盈亏率",
+      cell: (row) => (
+        <div
+          className={cn(
+            "text-sm font-medium",
+            row.totalProfitAmountRate < 0 && "text-green-600",
+            row.totalProfitAmountRate > 0 && "text-red-600"
+          )}
+        >
+          {row.totalProfitAmountRate}
+        </div>
+      ),
+    },
+  ];
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="rounded-md border p-4">
-          <div className="text-sm font-medium text-muted-foreground">
-            总交易次数
-          </div>
-          <div className="text-2xl font-bold">{result.totalTrades}</div>
-        </div>
-        <div className="rounded-md border p-4">
-          <div className="text-sm font-medium text-muted-foreground">胜率</div>
-          <div className="text-2xl font-bold text-green-600">
-            {result.winRate.toFixed(2)}%
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <DataTable columns={columns} data={closedTrades} />;
 }
