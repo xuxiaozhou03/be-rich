@@ -63,10 +63,10 @@ class Account {
       return;
     }
 
-    const { buyFee, requiredCash } = rest;
+    const { buyFee = 0, requiredCash = 0 } = rest;
     this.stock += signal.quantity;
-    this.cash = formatNumber(this.cash - requiredCash!);
-    this.stockInvestment = formatNumber(this.stockInvestment + requiredCash!);
+    this.cash = formatNumber(this.cash - requiredCash);
+    this.stockInvestment = formatNumber(this.stockInvestment + requiredCash, 2);
 
     // 记录买入
     this.records.push(
@@ -106,7 +106,8 @@ class Account {
 
     this.cash = formatNumber(this.cash + totalCost);
     this.stock -= signal.quantity;
-    this.stockInvestment = formatNumber(this.stockInvestment - totalCost);
+    this.stockInvestment =
+      this.stock === 0 ? 0 : formatNumber(this.stockInvestment - totalCost, 2);
 
     // 记录卖出
     this.records.push(

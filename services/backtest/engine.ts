@@ -20,6 +20,7 @@ const runBacktestEngine = (
   if (!strategy) {
     throw new Error("请先加载策略");
   }
+
   const account = new Account(config);
 
   // 初始化策略

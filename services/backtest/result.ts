@@ -1,3 +1,4 @@
+import { formatNumber } from "@/lib/utils";
 import Record from "./record";
 
 class Result {
@@ -113,8 +114,9 @@ class Result {
    * 公式：((finalCapital - initialCapital) / initialCapital) * 100。
    */
   get totalReturn() {
-    return (
-      ((this.finalCapital - this.initialCapital) / this.initialCapital) * 100
+    return formatNumber(
+      ((this.finalCapital - this.initialCapital) / this.initialCapital) * 100,
+      2
     );
   }
 

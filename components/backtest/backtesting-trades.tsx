@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 import { IResult } from "@/services/backtest/result";
 import DataTable, { Column } from "../data-table";
 import { IRecord } from "@/services/backtest/record";
@@ -98,7 +98,7 @@ export function BacktestingTrades({ result }: BacktestingTradesProps) {
             row.stockProfitAmountRate > 0 && "text-red-600"
           )}
         >
-          {row.stockProfitAmountRate}
+          {formatNumber(row.stockProfitAmountRate * 100, 2)}%
         </div>
       ),
     },

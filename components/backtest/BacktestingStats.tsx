@@ -18,9 +18,7 @@ export function BacktestingStats({ result }: BacktestingStatsProps) {
   const stats = [
     {
       name: "总回报",
-      value: `${result.totalReturn >= 0 ? "+" : ""}${result.totalReturn.toFixed(
-        2
-      )}%`,
+      value: `${result.totalReturn >= 0 ? "+" : ""}${result.totalReturn}%`,
       benchmark: `+${benchmarkReturn.toFixed(2)}%`,
     },
     {
@@ -94,9 +92,9 @@ export function BacktestingStats({ result }: BacktestingStatsProps) {
               <div className="text-sm">{stat.name}</div>
               <div
                 className={`text-sm font-medium ${
-                  stat.value.startsWith("+")
+                  stat.value.startsWith("-")
                     ? "text-green-600"
-                    : stat.value.startsWith("-")
+                    : stat.value.startsWith("+")
                     ? "text-red-600"
                     : ""
                 }`}
@@ -105,9 +103,9 @@ export function BacktestingStats({ result }: BacktestingStatsProps) {
               </div>
               <div
                 className={`text-sm ${
-                  stat.benchmark.startsWith("+")
+                  stat.benchmark.startsWith("-")
                     ? "text-green-600"
-                    : stat.benchmark.startsWith("-")
+                    : stat.benchmark.startsWith("+")
                     ? "text-red-600"
                     : ""
                 }`}
