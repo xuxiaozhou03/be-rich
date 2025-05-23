@@ -140,6 +140,9 @@ importers:
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      node-eval:
+        specifier: ^2.0.0
+        version: 2.0.0
       react:
         specifier: ^19
         version: 19.0.0
@@ -1564,6 +1567,10 @@ packages:
       sass:
         optional: true
 
+  node-eval@2.0.0:
+    resolution: {integrity: sha512-Ap+L9HznXAVeJj3TJ1op6M6bg5xtTq8L5CU/PJxtkhea/DrIxdTknGKIECKd/v/Lgql95iuMAYvIzBNd0pmcMg==}
+    engines: {node: '>= 4'}
+
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
@@ -1585,6 +1592,10 @@ packages:
 
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
+
+  path-is-absolute@1.0.1:
+    resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
+    engines: {node: '>=0.10.0'}
 
   path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
@@ -3309,6 +3320,10 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+  node-eval@2.0.0:
+    dependencies:
+      path-is-absolute: 1.0.1
+
   node-releases@2.0.19: {}
 
   normalize-path@3.0.0: {}
@@ -3320,6 +3335,8 @@ snapshots:
   object-hash@3.0.0: {}
 
   package-json-from-dist@1.0.1: {}
+
+  path-is-absolute@1.0.1: {}
 
   path-key@3.1.1: {}
 
