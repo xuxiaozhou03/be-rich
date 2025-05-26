@@ -1,4 +1,4 @@
-import { formatNumber } from "@/lib/utils";
+import { formatNumber } from "../helper/tool";
 import Record from "./record";
 
 class Result {

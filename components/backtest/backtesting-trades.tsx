@@ -1,9 +1,10 @@
 "use client";
 
-import { cn, formatNumber } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { IResult } from "@/services/backtest/result";
 import DataTable, { Column } from "../data-table";
 import { IRecord } from "@/services/backtest/record";
+import { formatNumber } from "@/services/helper/tool";
 
 interface BacktestingTradesProps {
   result: IResult;

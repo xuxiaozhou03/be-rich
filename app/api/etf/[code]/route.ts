@@ -1,5 +1,7 @@
 import { success } from "@/lib/utils";
+import getEtfDetail from "@/services/data/etf";
 
 export const GET = async () => {
-  return success({});
+  const res = await getEtfDetail("159822");
+  return success(res);
 };

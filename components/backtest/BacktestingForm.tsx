@@ -1,6 +1,6 @@
 "use client";
 
-import { request } from "@/lib/request";
+import { request } from "@/services/helper/request";
 import { Button } from "../ui/button";
 import { useBacktestResult } from "./context";
 import { IResult } from "@/services/backtest/result";

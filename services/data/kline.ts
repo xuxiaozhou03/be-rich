@@ -1,4 +1,4 @@
-import { request } from "@/lib/request";
+import { request } from "@/services/helper/request";
 
 // k 线图数据
 export interface IKline {

@@ -1,9 +1,9 @@
-import { formatNumber } from "@/lib/utils";
 import { IKline } from "../data/kline";
 import { ISignal } from "../strategy/base";
 import Record from "./record";
 import Result, { IResult } from "./result";
 import { IBacktestConfig } from "./engine";
+import { formatNumber } from "../helper/tool";
 
 class Account {
   // 持股数

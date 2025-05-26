@@ -1,5 +1,5 @@
-import { formatNumber } from "@/lib/utils";
 import { IKline } from "../data/kline";
+import { formatNumber } from "../helper/tool";
 import { ISignal } from "../strategy/base";
 
 class Record {

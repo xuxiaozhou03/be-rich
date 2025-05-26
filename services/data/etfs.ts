@@ -1,5 +1,4 @@
-import { request } from "@/lib/request";
-import _ from "lodash";
+import { request } from "@/services/helper/request";
 import evalCode from "node-eval"; // 引入 node-eval 包
 
 interface OriginalResponse {
@@ -43,7 +42,11 @@ const divideBy1000 = (value: number) => {
   if (value === undefined || value === null) {
     return 0;
   }
-  return _.divide(value, 1000);
+  // 实现 lodash 的 divide
+  if (isNaN(value) || value === Infinity || value === -Infinity) {
+    return 0;
+  }
+  return value / 1000;
 };
 
 /**
