@@ -15,17 +15,21 @@ const getEtfDetail = async (symbol: string) => {
   });
 
   const data = pickDataFromString(html, {
-    fullName: ".info.w790 tr:eq(0) td:eq(0)",
-    shortName: ".info.w790 tr:eq(0) td:eq(1)",
     // 业绩比较基准
     benchmark: ".info.w790 tr:eq(9) td:eq(0)",
     // 跟踪标的
     trackingTarget: ".info.w790 tr:eq(9) td:eq(1)",
-    // 成立日期/规模
-    established: ".info.w790 tr:eq(2) td:eq(1)",
+    // 资产规模
+    scale: ".info.w790 tr:eq(3) td:eq(0)",
   });
 
-  return data;
+  const result = {
+    benchmark: data.benchmark || "",
+    trackingTarget: data.trackingTarget || "",
+    scale: parseFloat(data.scale),
+  };
+
+  return result;
 };
 
 export default getEtfDetail;

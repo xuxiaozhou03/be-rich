@@ -80,16 +80,6 @@ const loopGet = async (params: Record<string, string>) => {
   return etfs;
 };
 
-// 获取所有 ETF
-export const getEtfs = async () => {
-  const params = {
-    fid: "f3",
-    fields: "f12,f13,f14,f1,f2,f4,f3,f152,f5,f6,f17,f18,f15,f16",
-    fs: "b:MK0021,b:MK0022,b:MK0023,b:MK0024,b:MK0827", // ETF 的市场标识
-  };
-  const etfs = await loopGet(params);
-  return etfs;
-};
 
 // 获取所有可转债
 // https://push2.eastmoney.com/api/qt/clist/get?np=1&fltt=1&invt=2&cb=jQuery371014170607516427247_1748423468561&fs=b%3AMK0354&fields=f12%2Cf13%2Cf14%2Cf1%2Cf2%2Cf4%2Cf3%2Cf152%2Cf232%2Cf233%2Cf234%2Cf229%2Cf230%2Cf231%2Cf235%2Cf236%2Cf154%2Cf237%2Cf238%2Cf239%2Cf240%2Cf241%2Cf227%2Cf242%2Cf26%2Cf243&fid=f3&pn=1&pz=50&po=1&dect=1&ut=fa5fd1943c7b386f172d6893dbfba10b&wbp2u=%7C0%7C0%7C0%7Cweb&_=1748423468562
