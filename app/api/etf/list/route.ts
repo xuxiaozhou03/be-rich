@@ -1,6 +1,6 @@
 import { success } from "@/lib/utils";
-import list from "@/etfs.json";
+import { etfs } from "@/services/data/etfs/list";
 
 export const GET = async () => {
-  return success(list);
+  return success(etfs);
 };

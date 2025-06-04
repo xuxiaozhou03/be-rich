@@ -1,10 +1,9 @@
-import { StockFieldKeys } from "@/services/constant";
 import { request } from "@/services/helper/request";
 import evalCode from "node-eval"; // 引入 node-eval 包
 
 type OriginData = {
   f12: string; // 股票代码
-  f13: string; // 市场
+  f13: 0 | 1; // 市场
   f14: string; // 股票名称
 };
 interface OriginalResponse {

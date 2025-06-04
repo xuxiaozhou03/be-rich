@@ -1,9 +1,9 @@
 import loopGet from "../list/loopGet";
-import getEtfDetail from "./detail";
-import { Etf } from "./type";
+import getEtfDetail from "../etf/detail";
+import { Etf } from "../etf/type";
 
 // 获取所有 ETF
-export const getEtfs = async () => {
+export const reptileEtfs = async () => {
   const params = {
     fid: "f3",
     fields: "f12,f13,f14",
