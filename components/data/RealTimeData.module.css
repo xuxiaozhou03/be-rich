@@ -1,0 +1,175 @@
+.container {
+  padding: 0;
+}
+
+.controlPanel {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controlPanel .ant-card-body {
+  padding: 16px 24px;
+}
+
+.marketOverview {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.marketOverview .ant-statistic {
+  text-align: center;
+}
+
+.dataTable {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dataTable .ant-table {
+  font-size: 12px;
+}
+
+.dataTable .ant-table-thead > tr > th {
+  background: #f5f5f5;
+  font-weight: 600;
+  padding: 8px;
+  text-align: center;
+}
+
+.dataTable .ant-table-tbody > tr > td {
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.dataTable .ant-table-tbody > tr:hover > td {
+  background: #f0f7ff;
+}
+
+/* 价格变化高亮动画 */
+.dataTable .ant-table-tbody > tr.price-up > td {
+  background: linear-gradient(90deg, rgba(82, 196, 26, 0.1) 0%, transparent 100%);
+  animation: priceUpFlash 0.5s ease-in-out;
+}
+
+.dataTable .ant-table-tbody > tr.price-down > td {
+  background: linear-gradient(90deg, rgba(245, 34, 45, 0.1) 0%, transparent 100%);
+  animation: priceDownFlash 0.5s ease-in-out;
+}
+
+@keyframes priceUpFlash {
+  0% {
+    background: rgba(82, 196, 26, 0.3);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+@keyframes priceDownFlash {
+  0% {
+    background: rgba(245, 34, 45, 0.3);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+/* 实时状态指示器 */
+.realTimeIndicator {
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.realTimeIndicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -8px;
+  width: 6px;
+  height: 6px;
+  background: #52c41a;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+/* 数据加载状态 */
+.loadingOverlay {
+  position: relative;
+}
+
+.loadingOverlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .dataTable .ant-table {
+    font-size: 11px;
+  }
+  
+  .dataTable .ant-table-thead > tr > th,
+  .dataTable .ant-table-tbody > tr > td {
+    padding: 4px 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .controlPanel .ant-card-body {
+    padding: 12px 16px;
+  }
+  
+  .marketOverview .ant-statistic {
+    margin-bottom: 12px;
+  }
+  
+  .dataTable .ant-table {
+    font-size: 10px;
+  }
+  
+  .dataTable .ant-table-thead > tr > th,
+  .dataTable .ant-table-tbody > tr > td {
+    padding: 3px 4px;
+  }
+}
+
+@media (max-width: 576px) {
+  .dataTable .ant-table-thead > tr > th,
+  .dataTable .ant-table-tbody > tr > td {
+    padding: 2px 3px;
+    font-size: 9px;
+  }
+  
+  .marketOverview .ant-row {
+    flex-direction: column;
+  }
+  
+  .marketOverview .ant-col {
+    margin-bottom: 8px;
+  }
+}

@@ -1,0 +1,258 @@
+/* Portfolio Page Styles */
+.portfolioPage {
+  padding: 0;
+  background: transparent;
+}
+
+.pageHeader {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pageHeader h2 {
+  margin: 0;
+  color: #262626;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.pageHeader .ant-typography {
+  margin: 0;
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+/* 统计卡片样式 */
+.portfolioPage .ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.portfolioPage .ant-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: #d9d9d9;
+}
+
+.portfolioPage .ant-statistic-title {
+  color: #8c8c8c;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.portfolioPage .ant-statistic-content {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* 选项卡样式 */
+.portfolioTabs {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.portfolioTabs .ant-tabs-tab {
+  font-weight: 500;
+}
+
+.portfolioTabs .ant-tabs-tab-active {
+  color: #1890ff;
+}
+
+/* 表格样式 */
+.portfolioPage .ant-table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.portfolioPage .ant-table-thead > tr > th {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+  font-weight: 600;
+  color: #262626;
+}
+
+.portfolioPage .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.portfolioPage .ant-table-tbody > tr:hover > td {
+  background: #fafafa;
+}
+
+/* 图表容器样式 */
+.chartContainer {
+  height: 300px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 过滤器样式 */
+.filterRow {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.filterRow .ant-select {
+  min-width: 120px;
+}
+
+.filterRow .ant-date-picker {
+  min-width: 200px;
+}
+
+/* 指标卡片样式 */
+.metricsCard {
+  padding: 16px;
+  text-align: center;
+}
+
+.metricsCard .metricValue {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.metricsCard .metricLabel {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 4px;
+}
+
+.metricsCard .metricChange {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 分配图表样式 */
+.allocationChart {
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border: 2px dashed #d9d9d9;
+  color: #999;
+  font-size: 14px;
+}
+
+/* 持仓详情样式 */
+.positionDetails {
+  padding: 16px;
+}
+
+.positionDetails .detailItem {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.positionDetails .detailItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.positionDetails .detailLabel {
+  font-weight: 500;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+.positionDetails .detailValue {
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .pageHeader .ant-space {
+    align-self: flex-end;
+  }
+  
+  .filterRow {
+    text-align: center;
+  }
+  
+  .filterRow .ant-space {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolioPage .ant-col {
+    margin-bottom: 16px;
+  }
+  
+  .pageHeader {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+  
+  .pageHeader h2 {
+    font-size: 20px;
+  }
+  
+  .portfolioTabs {
+    padding: 12px;
+  }
+  
+  .filterRow {
+    padding: 12px;
+  }
+  
+  .filterRow .ant-space {
+    width: 100%;
+  }
+  
+  .filterRow .ant-select,
+  .filterRow .ant-date-picker {
+    width: 100%;
+  }
+  
+  .chartContainer {
+    height: 250px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .portfolioPage .ant-statistic-content {
+    font-size: 20px;
+  }
+  
+  .pageHeader .ant-space {
+    align-self: stretch;
+  }
+  
+  .pageHeader .ant-space .ant-btn {
+    width: 100%;
+  }
+  
+  .metricsCard .metricValue {
+    font-size: 24px;
+  }
+  
+  .portfolioTabs .ant-tabs-tab {
+    font-size: 14px;
+  }
+}

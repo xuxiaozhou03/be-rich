@@ -1,0 +1,196 @@
+.riskManagement {
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 0 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+}
+
+.alertSection {
+  margin-bottom: 24px;
+}
+
+.metricsRow {
+  margin-bottom: 24px;
+}
+
+.metricsRow .ant-card {
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.subText {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.analysisRow {
+  margin-bottom: 24px;
+}
+
+.analysisRow .ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.detailAnalysis {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.detailAnalysis .ant-tabs-tab {
+  font-weight: 500;
+}
+
+.contributionCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contributionCell .ant-progress {
+  flex: 1;
+}
+
+.contributionText {
+  font-weight: 500;
+  color: #374151;
+  min-width: 40px;
+}
+
+.riskValue {
+  font-weight: 600;
+  color: #ef4444;
+}
+
+.ant-alert {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.ant-alert-error {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+}
+
+.ant-alert-warning {
+  background-color: #fefce8;
+  border-left: 4px solid #f59e0b;
+}
+
+.ant-alert-success {
+  background-color: #f0fdf4;
+  border-left: 4px solid #10b981;
+}
+
+.ant-statistic-title {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ant-statistic-content {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #374151;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: #f8fafc;
+}
+
+.ant-progress-bg {
+  border-radius: 4px;
+}
+
+.ant-progress-success-bg {
+  border-radius: 4px;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+  .riskManagement {
+    padding: 16px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .metricsRow .ant-col {
+    margin-bottom: 16px;
+  }
+  
+  .analysisRow .ant-col {
+    margin-bottom: 16px;
+  }
+  
+  .contributionCell {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .contributionText {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .header h1 {
+    font-size: 20px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .controls .ant-btn,
+  .controls .ant-select {
+    width: 100%;
+  }
+  
+  .metricsRow .ant-col {
+    width: 100%;
+  }
+  
+  .analysisRow .ant-col {
+    width: 100%;
+  }
+}
