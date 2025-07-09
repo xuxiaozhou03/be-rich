@@ -1,10 +1,2 @@
-console.log("Hello, TypeScript World!");
-
-function greet(name: string): string {
-  return `Hello, ${name}!`;
-}
-
-const message = greet("World");
-console.log(message);
-
-export { greet };
+console.log("Hello, TypeScript World! 🚀");
+console.log("File updated - hot reload should trigger!");
